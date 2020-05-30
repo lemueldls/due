@@ -20,7 +20,7 @@ let timeoutCooldown: number;
  * @param {number} timeout - Time for cooldown to end in milliseconds
  * @default 2000
  */
-export const buildTimeout = async (timeout: number = 2000): Promise<never> =>
+const buildTimeout = async (timeout: number = 2000): Promise<never> =>
   new Promise((resolve) => {
     clearTimeout(timeoutCooldown);
     timeoutCooldown = setTimeout(() => {
