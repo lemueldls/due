@@ -5,11 +5,11 @@ await log.setup({
     console: new log.handlers.ConsoleHandler("DEBUG", {
       formatter: "｢{levelName}｣ {msg}", // ℹ
     }),
-    file: new log.handlers.FileHandler("WARNING", {
-      filename: "./log.txt",
-      // you can change format of output message using any keys in `LogRecord`
-      formatter: "[{datetime} {levelName} ({level} {levelName})] {msg}",
-    }),
+    // file: new log.handlers.FileHandler("WARNING", {
+    //   filename: "./log.txt",
+    //   // you can change format of output message using any keys in `LogRecord`
+    //   formatter: "[{datetime} {levelName} ({level} {levelName})] {msg}",
+    // }),
   },
 
   loggers: {
