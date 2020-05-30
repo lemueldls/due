@@ -1,0 +1,13 @@
+vscode:
+  extensions:
+    - denoland.vscode-deno@1.24.0:oQMPoBQEsIBCwrBK0L4qXA==
+
+tasks:
+  - init: curl -fsSL https://deno.land/x/install/install.sh | sh
+  - command: echo "\export DENO_INSTALL=\"/home/gitpod/.deno\"
+              export PATH=\"$DENO_INSTALL/bin:$PATH\"" >> ~/.bashrc && bash
+    command: /home/gitpod/.deno/bin/deno run --allow-{run,read} mod.ts
+
+ports:
+  - port: 8000
+    onOpen: open-browser
