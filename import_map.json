@@ -1,0 +1,6 @@
+{
+  "//": "XXX",
+  "imports": {
+    "vue": "https://cdn.jsdelivr.net/npm/vue/dist/vue.esm.browser.min.js"
+  }
+}
