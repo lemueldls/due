@@ -1,8 +1,7 @@
 export const start = async () => {
   const output = Deno.run({
-    cmd: "deno run --allow-net --allow-run --allow-read --allow-write --unstable --importmap=import_map.json server/index.ts".split(
-      " "
-    ),
+    cmd: `deno run --allow-net --allow-run --allow-read --allow-write --unstable --importmap=import_map.json ${Deno.cwd()}/server/index.ts`
+      .split(" "),
     stderr: "piped",
   });
 
