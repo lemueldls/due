@@ -12,7 +12,7 @@ You can test and see a copy using the Gitpod below.
 ## Running
 
 ```bash
-deno run --allow-{run,read} mod.ts
+deno run --allow-run --allow-read mod.ts
 ```
 
 This should create a server on <http://localhost:8000> using Vue.js as the core framework.

@@ -1,7 +1,8 @@
 export const start = async () => {
   const output = Deno.run({
-    cmd: `deno run --allow-net --allow-run --allow-read --allow-write --unstable --importmap=import_map.json ${Deno.cwd()}/server/index.ts`
-      .split(" "),
+    cmd: `deno run --inspect-brk --allow-net --allow-run --allow-read --allow-write --unstable ${Deno.cwd()}/server/index.ts`.split(
+      " "
+    ),
     stderr: "piped",
   });
 
@@ -10,4 +11,4 @@ export const start = async () => {
 };
 start();
 
-for await (const event of Deno.watchFs(`${Deno.cwd()}/server`)) await start();
+// for await (const event of Deno.watchFs(`${Deno.cwd()}/server`)) await start();
