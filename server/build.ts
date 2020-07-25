@@ -14,7 +14,7 @@ export const lint = async (paths: string[]) => {
     stdout: "piped",
   }).output();
 
-  log.info(output);
+  log.warning(output);
 };
 
 let timeoutCooldown: number;
@@ -47,7 +47,7 @@ export const build = async (event?: Deno.FsEvent) => {
   // Deno.writeFile(bundle, encoder.encode("// deno-fmt-ignore-file\n"));
   // Deno.writeFile(bundle, await output.stderrOutput()), { append: true });
 
-  const output = await Deno.run({
+  const output = Deno.run({
     cmd: ["deno", "bundle", main, bundle],
     stderr: "piped"
   });

@@ -1,6 +1,7 @@
 import Vue from "https://cdn.jsdelivr.net/npm/vue/dist/vue.esm.browser.min.js";
 
-Vue({
+// @ts-ignore
+new Vue({
   el: "#app",
   data: {
     greeting: "Welcome to your Vue.js app!",
