@@ -14,26 +14,14 @@ export const lint = async (paths: string[]) => {
     stdout: "piped",
   }).output();
 
-  log.warning(output);
+  if (Object.keys(output).length) log.warning(output);
 };
 
-let timeoutCooldown: number;
-/**
- * @param {number} timeout - Time for cooldown to end in milliseconds
- * @default 2000
- */
-const buildTimeout = async (timeout: number = 2000): Promise<never> =>
-  new Promise((resolve) => {
-    clearTimeout(timeoutCooldown);
-    timeoutCooldown = setTimeout(() => {
-      resolve();
-    }, timeout);
-  });
 
+let building = false;
 export const build = async (event?: Deno.FsEvent) => {
-  await buildTimeout();
-  if (event?.kind === "modify" || event?.kind === "create")
-    await lint(event.paths);
+  building = true;
+  if (event?.kind === "modify" || event?.kind === "create") await lint(event.paths);
 
   log.info("Building...");
   console.time("Build Time");
@@ -49,7 +37,7 @@ export const build = async (event?: Deno.FsEvent) => {
 
   const output = Deno.run({
     cmd: ["deno", "bundle", main, bundle],
-    stderr: "piped"
+    stderr: "piped",
   });
 
   console.group("");
@@ -60,8 +48,12 @@ export const build = async (event?: Deno.FsEvent) => {
   log.info("Completed Build.");
   console.timeEnd("Build Time");
 
+  building = false;
   return output;
 };
 await build();
 
-for await (const event of Deno.watchFs(`${Deno.cwd()}/src`)) await build(event);
+// @ts-ignore
+for await (const event of Deno.watchFs(`${Deno.cwd()}/src`)) {
+  if (!building) build(building || event);
+}
